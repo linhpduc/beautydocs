@@ -1,49 +1,47 @@
 # Phân biệt giữa data và pageData
 
-Khi render dữ liệu hoặc xử lý logic trên js, mọi người sẽ rất hay nhìn thấy 2 object `Client.pageData` và `Client.data`.
+Khi render dữ liệu hoặc xử lý logic trên js, mọi người sẽ rất hay nhìn thấy 2 object `#!php5 Client.pageData` và `Client.data`.
 
 Hai object này chính là cách render dữ liệu từ server lên giao diện chính.
 
-## Ví dụ
+## pageData
 
-### pageData
-
-Bạn load dữ liệu ra ra mảng `books`. Bạn gán nó vào key books bằng hàm `\Client::pageData `.
-```php
+Bạn load dữ liệu ra ra mảng `books`. Bạn gán nó vào key books bằng hàm `\Client::pageData`.
+``` php
 \Client::pageData("books", $books);
 ```
 
 Sau đó bạn có thể sử dụng nó qua object `Client.pageData` ở phía JS.
-```js
+```js title="script.js" linenums="1"
 var html = AP.render(Client.pageData.books, function (book) {
     return `<div>${book.name}</div>`
 }
 ```
 
-### page
+## data
 
 Bạn load dữ liệu ra mảng `books`. Bạn gán nó vào key books bằng hàm `\Client::data`.
-```php
+``` php
 \Client::data("books", $books);
 ```
 
 Sau đó bạn có thể sử dụng nó qua object `Client` ở phía JS
-```js
+```js title="script.js" linenums="1" hl_lines="1"
 var html = AP.render(Client.books, function (book) {
     return `<div>${book.name}</div>`
 }
 ```
 
-## Sự khác biệt
+!!! note "Sự khác biệt"
 
-Khác biệt ở chỗ Object `Client.data` sẽ chỉ phải load lần đầu khi mở trang.
-
-Khi bạn navigate giữa các đường link bên trong một app của Base, Base platform support chỉ load ajax, và fill html vào những content ở giữa, còn bản chất trang web không hề load lại.
-
-⇒ Khi tình huống đó xảy ra, `Client.data` sẽ không load lại , trong khi object `Client.pageData` sẽ thay đổi tuỳ vào giữ liệu của trang.
-⇒ đó cũng chính là lý do tại sao nó gọi là **pageData**, right ??
-
-Để load lại object `Client.data` thì ta chỉ cần đơn giản là load lại trạng web bằng cách F5 refresh.
+    Khác biệt ở chỗ Object `Client.data` sẽ chỉ phải load lần đầu khi mở trang.
+    
+    Khi bạn navigate giữa các đường link bên trong một app của Base, Base platform support chỉ load ajax, và fill html vào những content ở giữa, còn bản chất trang web không hề load lại.
+    
+    ⇒ Khi tình huống đó xảy ra, `Client.data` sẽ không load lại , trong khi object `Client.pageData` sẽ thay đổi tuỳ vào giữ liệu của trang.
+    ⇒ đó cũng chính là lý do tại sao nó gọi là **pageData**, right ??
+    
+    Để load lại object `Client.data` thì ta chỉ cần đơn giản là load lại trạng web bằng cách F5 refresh.
 
 ## Sử dụng
 
