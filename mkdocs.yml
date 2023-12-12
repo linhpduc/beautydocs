@@ -1,1 +1,9 @@
-site_name: My Docs
+site_name: Beauty Docs
+site_url: https://github.com/linhpduc/beautydocs
+nav:
+  - Home: index.md
+  - Framework Reference:
+    - Overview: framework/index.md
+    - Client cache: framework/client-cache.md
+theme:
+  name: material
